@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Martins Atacadista</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Dashboard - Martins Atacadista</h1>
+        <a href="{{ url_for('logout') }}">Sair</a>
+    </header>
+    <main>
+        {% if current_user.role == 'admin' %}
+        <section class="upload">
+            <h2>Upload de Relatório</h2>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+        {% endif %}
+
+        <section class="filiais">
+            <h2>Selecione a Filial</h2>
+            <ul>
+                {% for filial in filiais %}
+                <li><a href="{{ url_for('filial_dashboard', filial=filial) }}">{{ filial }}</a></li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

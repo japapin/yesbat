@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Filial {{ filial }} - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Dashboard Filial {{ filial }}</h1>
+        <a href="{{ url_for('index') }}">Voltar</a>
+    </header>
+    <main>
+        <section class="resumo">
+            <h2>Resumo do Dia</h2>
+            <p><strong>Total de Pallets:</strong> {{ total_pallets }}</p>
+            <p><strong>Fornecedores Agendados:</strong> {{ fornecedores | join(", ") }}</p>
+            <h3>Distribuição por Operação (%)</h3>
+            <ul>
+                {% for operacao, percentual in operacoes.items() %}
+                <li>{{ operacao }}: {{ percentual | round(2) }}%</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
